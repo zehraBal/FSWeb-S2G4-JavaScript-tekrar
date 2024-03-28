@@ -99,25 +99,31 @@ let ucetambolunenler,
 
 // 3a çözümü
 
+enkucuk = sayilar[0];
+enbuyuk = sayilar[0];
 for (let i = 0; i < sayilar.length; i++) {
-  if (sayilar[0] < sayilar[i]) {
+  if (enkucuk > sayilar[i]) {
     enkucuk = sayilar[i];
   }
-  if (sayilar[0] < sayilar[i]) {
+  if (enbuyuk < sayilar[i]) {
     enbuyuk = sayilar[i];
   }
 }
 
 // 3b çözümü:
 
-ucetambolunenler = sayilar.forEach((sayi) => sayi % 3);
+ucetambolunenler = [];
+sayilar.forEach((sayi) => {
+  if (sayi % 3 === 0) {
+    ucetambolunenler.push(sayi);
+  }
+});
 
 // 3c çözümü:
 
-ucebolunenlerintoplami = ucetambolunenler.reduce(
-  (toplam, sayi) => toplam + sayi,
-  0
-);
+ucebolunenlerintoplami = ucetambolunenler.reduce((toplam, sayi) => {
+  return toplam + sayi;
+}, 0);
 
 // 3d çözümü
 
@@ -128,14 +134,19 @@ besyuzdenkucuksayilar = sayilar.filter((sayi) => sayi < 500);
 siralisayilar = besyuzdenkucuksayilar.sort((a, b) => a - b);
 
 // 3f çözümü
-
+tekraredensayilar = [];
 const tekrar = {};
-for (sayi of sayilar) {
+sayilar.forEach((sayi, index) => {
   if (tekrar[sayi] === undefined) {
     tekrar[sayi] = 1;
   } else {
     tekrar[sayi] += 1;
   }
+});
+for (let deger in tekrar) {
+  tekraredensayilar.push(
+    `${deger} sayısı ${tekrar[deger]} kere tekrar edilmiştir`
+  );
 }
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
